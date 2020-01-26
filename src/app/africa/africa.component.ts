@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
-import africa from '../../assets/africa.json';
+import africa from '../../assets/teruel.json';
 
 @Component({
   selector: 'app-africa',
@@ -16,9 +16,9 @@ export class AfricaComponent implements OnInit {
   ngOnInit() {
 
     const projection = d3.geoMercator()
-      .scale(400)
-      .translate([200, 280])
-      .center([0, 5]);
+      .scale(4000)
+      .translate([0, 0])
+      .center([0, 0]);
 
     const geoGenerator = d3.geoPath()
       .projection(projection);
@@ -47,11 +47,14 @@ export class AfricaComponent implements OnInit {
     function update(geojson) {
       const u = d3.select('#content g.map')
         .selectAll('path')
-        .data(geojson.features);
+        .data(geojson.features)
+
 
       u.enter()
         .append('path')
         .attr('d', geoGenerator)
+        // .attr('n', (d: any) => d.properties.ADMIN)
+        .attr('n', (d: any) => d.properties.municipio)
         .on('mouseover', handleMouseover);
     }
 

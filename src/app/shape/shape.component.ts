@@ -25,6 +25,8 @@ export class ShapeComponent implements OnInit {
     const pathString = lineGenerator(this.data);
     const pathString2 = lineGenerator2(this.data);
 
+    console.log(pathString);
+
     d3.select('path#line')
       .attr('d', pathString);
     d3.select('path#curve')
